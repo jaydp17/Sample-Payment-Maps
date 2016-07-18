@@ -1,4 +1,11 @@
-apply plugin: 'com.android.application'
+buildscript {
+  repositories {
+    mavenCentral()
+  }
+  dependencies {
+    classpath 'me.tatarka:gradle-retrolambda:3.2.5'
+  }
+}
 
 repositories {
   mavenCentral()
@@ -6,6 +13,9 @@ repositories {
     url "https://s3-ap-southeast-1.amazonaws.com/godel-release/godel/"
   }
 }
+
+apply plugin: 'com.android.application'
+apply plugin: 'me.tatarka.retrolambda'
 
 android {
   compileSdkVersion 23
@@ -18,11 +28,18 @@ android {
     versionName "1.0"
     testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
   }
+  dataBinding {
+    enabled = true
+  }
   buildTypes {
     release {
       minifyEnabled false
       proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
     }
+  }
+  compileOptions {
+    sourceCompatibility JavaVersion.VERSION_1_8
+    targetCompatibility JavaVersion.VERSION_1_8
   }
 }
 
@@ -33,6 +50,7 @@ dependencies {
   compile 'com.android.support.constraint:constraint-layout:1.0.0-alpha3'
 
   compile 'com.instamojo:android-sdk:1.0.5'
+  retrolambdaConfig 'net.orfjackal.retrolambda:retrolambda:2.3.0'
 
   testCompile 'junit:junit:4.12'
   androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
