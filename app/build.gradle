@@ -19,6 +19,15 @@ apply plugin: 'me.tatarka.retrolambda'
 apply plugin: 'com.neenbedankt.android-apt'
 
 android {
+  signingConfigs {
+    config {
+      keyAlias 'jaydp.com'
+      keyPassword '123456'
+      storeFile file('signing_keys.jks')
+      storePassword '123456'
+    }
+  }
+
   compileSdkVersion 23
   buildToolsVersion "23.0.3"
   defaultConfig {
@@ -27,6 +36,7 @@ android {
     targetSdkVersion 23
     versionCode 1
     versionName "1.0"
+    multiDexEnabled true
     testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
   }
   dataBinding {
@@ -34,6 +44,7 @@ android {
   }
   buildTypes {
     release {
+      signingConfig signingConfigs.config
       minifyEnabled false
       proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
     }
@@ -46,6 +57,7 @@ android {
 
 def daggerVersion = '2.2'
 def appCompatVersion = '23.4.0'
+def playServiceVersion = '9.0.2'
 
 dependencies {
   compile fileTree(dir: 'libs', include: ['*.jar'])
@@ -53,8 +65,13 @@ dependencies {
   compile "com.android.support:appcompat-v7:$appCompatVersion"
   compile "com.android.support:design:$appCompatVersion"
   compile 'com.android.support.constraint:constraint-layout:1.0.0-alpha3'
+  compile 'com.android.support:multidex:1.0.1'
 
   retrolambdaConfig 'net.orfjackal.retrolambda:retrolambda:2.3.0'
+
+  /** Google Play Services */
+  compile "com.google.android.gms:play-services-maps:$playServiceVersion"
+  compile "com.google.android.gms:play-services-location:$playServiceVersion"
 
   /** Dagger 2 */
   compile "com.google.dagger:dagger:$daggerVersion"
