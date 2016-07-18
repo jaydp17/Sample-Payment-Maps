@@ -1,7 +1,7 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
-  <FrameLayout
+  <RelativeLayout
       android:layout_width="match_parent"
       android:layout_height="match_parent"
       tools:context="com.jaydp.samplepayment.maps.MapsActivity">
@@ -14,8 +14,20 @@
 
     <ImageView android:layout_width="24dp"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
+        android:layout_centerInParent="true"
         android:layout_marginBottom="24dp"
         android:src="@drawable/uber_pin"/>
-  </FrameLayout>
+
+    <Button
+        android:id="@+id/book_ride"
+        android:text="BOOK NOW"
+        android:layout_width="match_parent"
+        android:layout_marginLeft="@dimen/margin_16"
+        android:layout_marginRight="@dimen/margin_16"
+        android:layout_marginStart="@dimen/margin_16"
+        android:layout_marginEnd="@dimen/margin_16"
+        android:layout_marginBottom="8dp"
+        android:layout_alignParentBottom="true"
+        android:layout_height="56dp"/>
+  </RelativeLayout>
 </layout>

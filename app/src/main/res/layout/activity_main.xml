@@ -13,9 +13,10 @@
       tools:context="com.jaydp.samplepayment.payment.PaymentActivity">
 
     <TextView
+        android:layout_marginTop="@dimen/margin_16"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"/>
+        android:text="Add money to book your ride"/>
 
     <Button
         android:id="@+id/button"

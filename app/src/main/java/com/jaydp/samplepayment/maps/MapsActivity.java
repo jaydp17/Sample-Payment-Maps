@@ -35,6 +35,7 @@ public class MapsActivity extends BaseActivity implements MvpView {
     SupportMapFragment mapFragment =
         (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
     mapFragment.getMapAsync(mPresenter);
+    mBinding.bookRide.setOnClickListener(v -> mPresenter.onBookClicked());
   }
 
   @Override protected void injectDependencies(AppComponent appComponent) {

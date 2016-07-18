@@ -23,5 +23,6 @@ public abstract class MapsContract {
 
   public interface Presenter extends OnMapReadyCallback {
 
+    void onBookClicked();
   }
 }

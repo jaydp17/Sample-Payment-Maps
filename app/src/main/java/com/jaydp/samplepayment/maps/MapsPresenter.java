@@ -1,5 +1,6 @@
 package com.jaydp.samplepayment.maps;
 
+import android.content.Intent;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -9,6 +10,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.jaydp.samplepayment.R;
+import com.jaydp.samplepayment.payment.PaymentActivity;
 import java.util.ArrayList;
 
 import static com.jaydp.samplepayment.maps.MapsContract.MvpView;
@@ -27,6 +29,11 @@ public class MapsPresenter implements Presenter {
   public MapsPresenter(@NonNull MvpView view) {
     mView = view;
     initBikerPoints();
+  }
+
+  @Override public void onBookClicked() {
+    final Intent intent = PaymentActivity.intent(mView.getContext());
+    mView.startActivity(intent);
   }
 
   /**

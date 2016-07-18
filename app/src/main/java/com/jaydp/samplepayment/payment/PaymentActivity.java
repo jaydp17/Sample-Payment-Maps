@@ -1,5 +1,7 @@
 package com.jaydp.samplepayment.payment;
 
+import android.content.Context;
+import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -19,6 +21,10 @@ public class PaymentActivity extends BaseActivity implements MvpView {
 
   @Inject Presenter mPresenter;
   private ActivityMainBinding mBinding;
+
+  public static Intent intent(@NonNull Context context) {
+    return new Intent(context, PaymentActivity.class);
+  }
 
   @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
