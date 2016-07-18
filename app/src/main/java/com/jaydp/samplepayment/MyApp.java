@@ -1,7 +1,6 @@
 package com.jaydp.samplepayment;
 
 import android.app.Application;
-import com.instamojo.android.Instamojo;
 import com.jaydp.samplepayment.injectionbase.components.AppComponent;
 import com.jaydp.samplepayment.injectionbase.components.DaggerAppComponent;
 import com.jaydp.samplepayment.injectionbase.modules.AppModule;
@@ -20,7 +19,5 @@ public class MyApp extends Application {
     // Dependency Injection
     sAppComponent = DaggerAppComponent.builder().appModule(new AppModule(this)).build();
     sAppComponent.inject(this);
-
-    Instamojo.initialize(this);
   }
 }
