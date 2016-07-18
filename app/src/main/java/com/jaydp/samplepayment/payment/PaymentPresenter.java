@@ -50,6 +50,7 @@ public class PaymentPresenter implements Presenter {
       obj.put("description", "Testing Payment");
       obj.put("amount", "100");
       obj.put("name", "Jaydp Corp");
+      obj.put("theme", new JSONObject("{color: '#455A64'}"));
     } catch (JSONException e) {
       e.printStackTrace();
     }
