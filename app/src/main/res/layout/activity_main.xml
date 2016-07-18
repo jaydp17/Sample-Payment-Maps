@@ -10,7 +10,7 @@
       android:paddingStart="@dimen/margin_16"
       android:paddingRight="@dimen/margin_16"
       android:paddingEnd="@dimen/margin_16"
-      tools:context="com.jaydp.samplepayment.MainActivity">
+      tools:context="com.jaydp.samplepayment.payment.PaymentActivity">
 
     <TextView
         android:layout_width="wrap_content"
