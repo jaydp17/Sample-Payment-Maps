@@ -2,7 +2,14 @@
 A small repo that includes Google maps implementation &amp; [Razor Pay](https://razorpay.com/) to collect payment
 
 ### Demo
-![Demo GIF](http://i.giphy.com/BpUZxg9o4MaR2.gif)
+![Demo GIF](http://i.giphy.com/wGvQ83SI9wrPG.gif)
+
+### Payment Screenshots
+
+| Payment Selector | Pay with InstaMojo | Pay with RazorPay |
+|-----------|----------|----------|
+| <img src="https://github.com/jaydeep17/Sample-Payment-Maps/raw/master/screenshots/payment-selection.png" width="300"> | <img src="https://github.com/jaydeep17/Sample-Payment-Maps/raw/master/screenshots/instamojo.png" width="300"> | <img src="https://github.com/jaydeep17/Sample-Payment-Maps/raw/master/screenshots/razorpay.png" width="300"> |
+
 
 ## About the code
 - Model View Presenter (MVP) Architecture 
