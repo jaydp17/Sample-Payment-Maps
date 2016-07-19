@@ -3,4 +3,8 @@
   <color name="colorPrimary">#455A64</color>
   <color name="colorPrimaryDark">#263238</color>
   <color name="colorAccent">#009688</color>
+
+  <!-- Colors used in InstaMojo's SDK theme -->
+  <color name="primary_color">@color/colorPrimary</color>
+  <color name="accent_color">@color/colorAccent</color>
 </resources>

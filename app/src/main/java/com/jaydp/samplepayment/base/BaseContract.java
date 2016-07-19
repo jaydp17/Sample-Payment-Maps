@@ -18,5 +18,7 @@ public interface BaseContract {
     Intent getIntent();
 
     void startActivity(Intent intent);
+
+    void startActivityForResult(Intent intent, int requestCode);
   }
 }

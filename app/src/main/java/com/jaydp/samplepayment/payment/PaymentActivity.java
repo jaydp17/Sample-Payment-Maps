@@ -1,11 +1,14 @@
 package com.jaydp.samplepayment.payment;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.StringRes;
 import android.support.design.widget.Snackbar;
+import com.instamojo.android.helpers.Constants;
 import com.jaydp.samplepayment.R;
 import com.jaydp.samplepayment.base.BaseActivity;
 import com.jaydp.samplepayment.databinding.ActivityMainBinding;
@@ -21,6 +24,7 @@ public class PaymentActivity extends BaseActivity implements MvpView {
 
   @Inject Presenter mPresenter;
   private ActivityMainBinding mBinding;
+  private ProgressDialog mProgressDialog;
 
   public static Intent intent(@NonNull Context context) {
     return new Intent(context, PaymentActivity.class);
@@ -44,21 +48,29 @@ public class PaymentActivity extends BaseActivity implements MvpView {
    * Initializes all the UI components
    */
   private void initUI() {
-    mBinding.button.setOnClickListener(v -> mPresenter.onPayClicked());
+    mBinding.razorPay.setOnClickListener(v -> mPresenter.onRazorPayClicked());
+    mBinding.instaPay.setOnClickListener(v -> mPresenter.onInstaPayClicked());
   }
 
   /**
    * RazorPay requires the name of this method to be <tt>onPaymentSuccess</tt>
    */
   public void onPaymentSuccess(String razorpayPaymentID) {
-    mPresenter.onPaymentSuccess(razorpayPaymentID);
+    mPresenter.onRazorPaySuccess(razorpayPaymentID);
   }
 
   /**
    * RazorPay requires the name of this method to be <tt>onPaymentError</tt>
    */
   public void onPaymentError(int code, String response) {
-    mPresenter.onPaymentError(code, response);
+    mPresenter.onRazorPayError(code, response);
+  }
+
+  @Override protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    super.onActivityResult(requestCode, resultCode, data);
+    if (requestCode == Constants.REQUEST_CODE && data != null) {
+      mPresenter.onInstaMojoResult(data);
+    }
   }
 
   /**
@@ -68,5 +80,28 @@ public class PaymentActivity extends BaseActivity implements MvpView {
    */
   @Override public void showSnackBar(@NonNull String text) {
     Snackbar.make(mBinding.getRoot(), text, Snackbar.LENGTH_LONG).show();
+  }
+
+  /**
+   * Shows a progress dialog with the given string resource
+   */
+  @Override public void showProgressDialog(@StringRes int resId) {
+    mProgressDialog = new ProgressDialog(this);
+    mProgressDialog.setMessage(getString(resId));
+    mProgressDialog.show();
+  }
+
+  /**
+   * Hide the progress bar if it's currently visible
+   */
+  @Override public void hideProgressDialog() {
+    if (mProgressDialog != null) {
+      runOnUiThread(() -> mProgressDialog.hide());
+    }
+  }
+
+  @Override protected void onStop() {
+    hideProgressDialog();
+    super.onStop();
   }
 }

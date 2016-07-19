@@ -1,14 +1,11 @@
 package com.jaydp.samplepayment.payment;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
-import android.util.Log;
-import com.jaydp.samplepayment.BuildConfig;
-import com.jaydp.samplepayment.R;
-import com.razorpay.Checkout;
-import org.json.JSONException;
-import org.json.JSONObject;
+import com.jaydp.samplepayment.payment.gateways.GateWayContract;
+import com.jaydp.samplepayment.payment.gateways.InstaMojoPresenter;
+import com.jaydp.samplepayment.payment.gateways.RazorPayPresenter;
 
-import static com.jaydp.samplepayment.payment.PaymentContract.MvpView;
 import static com.jaydp.samplepayment.payment.PaymentContract.Presenter;
 
 /**
@@ -16,76 +13,53 @@ import static com.jaydp.samplepayment.payment.PaymentContract.Presenter;
  */
 public class PaymentPresenter implements Presenter {
 
-  private static final String TAG = "PaymentPresenter";
-  @NonNull private final MvpView mView;
+  @NonNull private final RazorPayPresenter mRazorPayPresenter;
+  @NonNull private final InstaMojoPresenter mInstaPresenter;
 
-  public PaymentPresenter(@NonNull MvpView view) {
-    mView = view;
+  public PaymentPresenter(@NonNull RazorPayPresenter razorPayPresenter,
+      @NonNull InstaMojoPresenter instaPresenter) {
+    mRazorPayPresenter = razorPayPresenter;
+    mInstaPresenter = instaPresenter;
   }
 
   /**
-   * Listener for Pay Button
+   * Pay using RazorPay
    */
-  @Override public void onPayClicked() {
-    final Checkout co = new Checkout();
-    co.setPublicKey(BuildConfig.RAZORPAY_PUBLIC_KEY);
-    co.setImage(R.mipmap.ic_launcher);
-
-    try {
-      final JSONObject details = getPaymentDetails();
-      details.put("prefill", getUserDetails());
-      co.open((PaymentActivity) mView.getContext(), details);
-    } catch (Exception e) {
-      e.printStackTrace();
-    }
+  @Override public void onRazorPayClicked() {
+    internalPay(mRazorPayPresenter);
   }
 
   /**
-   * Details of the transaction, like name of the company taking money, amount, & a little bit of
-   * description about the transaction
+   * Pay Using InstaMojo
    */
-  private JSONObject getPaymentDetails() {
-    JSONObject obj = new JSONObject();
-    try {
-      obj.put("description", "Testing Payment");
-      obj.put("amount", "100");
-      obj.put("name", "Jaydp Corp");
-      obj.put("theme", new JSONObject("{color: '#455A64'}"));
-    } catch (JSONException e) {
-      e.printStackTrace();
-    }
-    return obj;
+  @Override public void onInstaPayClicked() {
+    internalPay(mInstaPresenter);
   }
 
   /**
-   * Details of the person who's paying
+   * Adds the details of the Buyer to a Gateway Presenter
+   * This method doesn't care which Payment Gateway is used, its only job is to use the GateWay
+   * Presenter Contract and passthe Buyer details
    */
-  private JSONObject getUserDetails() {
-    JSONObject details = new JSONObject();
-    try {
-      details.put("email", "jaydp17@gmail.com");
-      details.put("contact", "9033819605");
-      details.put("name", "Jaydeep Solanki");
-    } catch (JSONException e) {
-      e.printStackTrace();
-    }
-    return details;
+  private void internalPay(@NonNull GateWayContract.Presenter gatewayPresenter) {
+    gatewayPresenter.pay("Jaydeep", "jaydp17@gmail.com", "9033819605", "100", "Testing payment");
   }
 
   /**
-   * Callback for Payment Success
+   * Callback for RazorPay Payment Success
    */
-  @Override public void onPaymentSuccess(String razorpayPaymentID) {
-    Log.d(TAG, "onPaymentSuccess: " + razorpayPaymentID);
-    mView.showSnackBar("Payment SuccessFul");
+  @Override public void onRazorPaySuccess(String razorpayPaymentID) {
+    mRazorPayPresenter.onPaymentSuccess(razorpayPaymentID);
   }
 
   /**
-   * Callback for Payment Error
+   * Callback for RazorPay Payment Error
    */
-  @Override public void onPaymentError(int code, String response) {
-    Log.d(TAG, "onPaymentError(code): " + code);
-    Log.d(TAG, "onPaymentError: " + response);
-    mView.showSnackBar("Payment Cancelled");
+  @Override public void onRazorPayError(int code, String response) {
+    mRazorPayPresenter.onPaymentError(code, response);
+  }
+
+  @Override public void onInstaMojoResult(@NonNull Intent data) {
+    mInstaPresenter.onPaymentResult(data);
   }
 }

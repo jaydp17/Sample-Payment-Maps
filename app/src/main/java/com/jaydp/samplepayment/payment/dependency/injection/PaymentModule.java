@@ -4,6 +4,8 @@ import android.support.annotation.NonNull;
 import com.jaydp.samplepayment.injectionbase.scope.PerActivity;
 import com.jaydp.samplepayment.payment.PaymentActivity;
 import com.jaydp.samplepayment.payment.PaymentPresenter;
+import com.jaydp.samplepayment.payment.gateways.InstaMojoPresenter;
+import com.jaydp.samplepayment.payment.gateways.RazorPayPresenter;
 import dagger.Module;
 import dagger.Provides;
 
@@ -23,6 +25,8 @@ import static com.jaydp.samplepayment.payment.PaymentContract.Presenter;
   }
 
   @Provides @PerActivity public Presenter presenter(MvpView view) {
-    return new PaymentPresenter(view);
+    RazorPayPresenter razorPayPresenter = new RazorPayPresenter(view);
+    InstaMojoPresenter instaMojoPresenter = new InstaMojoPresenter(view);
+    return new PaymentPresenter(razorPayPresenter, instaMojoPresenter);
   }
 }

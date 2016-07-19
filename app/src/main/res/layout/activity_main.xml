@@ -19,8 +19,14 @@
         android:text="Add money to book your ride"/>
 
     <Button
-        android:id="@+id/button"
-        android:text="Pay"
+        android:id="@+id/razor_pay"
+        android:text="Pay with RazorPay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <Button
+        android:id="@+id/insta_pay"
+        android:text="Pay with InstaMojo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 

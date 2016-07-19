@@ -1,4 +1,5 @@
 <resources>
   <string name="app_name">Sample Payment &amp; Maps</string>
   <string name="title_activity_maps">Map</string>
+  <string name="creating_order">Creating order…</string>
 </resources>

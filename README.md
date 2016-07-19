@@ -9,6 +9,7 @@ A small repo that includes Google maps implementation &amp; [Razor Pay](https://
 - Android [Databinding](https://developer.android.com/topic/libraries/data-binding/index.html) for XML views
 - Uses [Dagger2](http://google.github.io/dagger/) for Dependency Injection
 - [RetroLambda](https://github.com/evant/gradle-retrolambda) for Java 8 style lambdas
+- Uses [Android Support Annotations](http://tools.android.com/tech-docs/support-annotations) for better variable description
 
 ## How to Run it?
 The app requires a Razor Pay public key to compile.

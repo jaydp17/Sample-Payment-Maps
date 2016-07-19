@@ -1,6 +1,8 @@
 package com.jaydp.samplepayment.payment;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.annotation.StringRes;
 import com.jaydp.samplepayment.base.BaseContract;
 
 /**
@@ -11,15 +13,22 @@ public abstract class PaymentContract {
   public interface MvpView extends BaseContract.MvpView {
 
     void showSnackBar(@NonNull String text);
+
+    void showProgressDialog(@StringRes int resId);
+
+    void hideProgressDialog();
   }
 
   public interface Presenter {
 
-    void onPayClicked();
+    void onRazorPayClicked();
 
-    void onPaymentSuccess(String razorpayPaymentID);
+    void onRazorPaySuccess(String razorpayPaymentID);
 
-    void onPaymentError(int code, String response);
+    void onRazorPayError(int code, String response);
 
+    void onInstaPayClicked();
+
+    void onInstaMojoResult(@NonNull Intent data);
   }
 }

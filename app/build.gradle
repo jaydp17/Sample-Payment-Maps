@@ -90,6 +90,9 @@ dependencies {
   apt "com.google.dagger:dagger-compiler:$daggerVersion"
   provided 'javax.annotation:jsr250-api:1.0'
 
+  /** InstaMojo */
+  compile 'com.instamojo:android-sdk:1.0.5'
+
   testCompile 'junit:junit:4.12'
   androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
     exclude group: 'com.android.support', module: 'support-annotations'
