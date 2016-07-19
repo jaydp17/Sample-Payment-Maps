@@ -57,7 +57,7 @@ android {
 
 def daggerVersion = '2.2'
 def appCompatVersion = '24.1.0'
-def playServiceVersion = '9.0.2'
+def playServiceVersion = '9.2.1'
 
 dependencies {
   compile fileTree(dir: 'libs', include: ['*.jar'])
