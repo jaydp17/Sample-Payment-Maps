@@ -1,5 +1,5 @@
 # Sample-Payment-Maps
-A small repo that includes Google maps implementation &amp; [Razor Pay](https://razorpay.com/) to collect payment
+A small repo that includes Google maps implementation &amp; Payment gateways like [Instamojo](https://www.instamojo.com/) and [Razor Pay](https://razorpay.com/) to collect payment
 
 ### Demo
 ![Demo GIF](http://i.giphy.com/wGvQ83SI9wrPG.gif)
